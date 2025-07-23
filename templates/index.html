@@ -1,14 +1,82 @@
 <!DOCTYPE html>
-<html>
-<head><title>AI Resume Scanner</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Resume Scanner</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 40px;
+      color: #333;
+    }
+    .container {
+      background: #fff;
+      max-width: 600px;
+      margin: auto;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #4f46e5;
+    }
+    label {
+      font-weight: 600;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4f46e5;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #3730a3;
+    }
+    .score-box {
+      text-align: center;
+      background: #e0f7fa;
+      padding: 20px;
+      border-radius: 8px;
+      font-size: 20px;
+      color: #006064;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
 <body>
-  <h2>Upload Resume & Job Description</h2>
-  <form action="/scan" method="post" enctype="multipart/form-data">
-    <label>Upload Resume (PDF):</label><br>
-    <input type="file" name="resume"><br><br>
-    <label>Paste Job Description:</label><br>
-    <textarea name="jd" rows="10" cols="50"></textarea><br><br>
-    <input type="submit" value="Scan">
-  </form>
+  <div class="container">
+    <h1>AI Resume Scanner</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <label for="resume">Upload Resume (PDF only):</label>
+      <input type="file" name="resume" required>
+
+      <label for="jd">Paste Job Description:</label>
+      <textarea name="jd" rows="8" placeholder="Paste the job description here..." required></textarea>
+
+      <button type="submit">Scan & Match</button>
+    </form>
+
+    {% if match_score is not none %}
+      <div class="score-box">
+        ✅ Resume Match Score: {{ match_score }}%
+      </div>
+    {% endif %}
+  </div>
 </body>
 </html>
+
